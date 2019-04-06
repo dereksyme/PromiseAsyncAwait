@@ -29,10 +29,10 @@ let promiseToCleanRoom = new Promise(function(resolve, reject){
 let cleanRoom = function() {
 	return new Promise(function(resolve, reject) {
 		
-		  //resolve('Cleaned The Room');
-		  reject('Failed to clean the room');
+		resolve('Cleaned The Room');
+		//reject('Failed to clean the room');
 	});
-  };
+};
   
   let removeGarbage = function(message) {
 	return new Promise(function(resolve, reject) {
@@ -56,7 +56,7 @@ let cleanRoom = function() {
 
   Promise.all([cleanRoom(),removeGarbage(),winIcecream()]).then(function(){
 	  console.log('all finished');
-	console.log(cleanRoom);
+	console.log(cleanRoom());
 	
 	}).catch(function(resultOfPromise){
 		console.log(resultOfPromise);

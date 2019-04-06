@@ -1,31 +1,42 @@
+const myUtil = require('util');
+
+const claim = {name:'claim1'};
+
+const exportsModule = async()=>{
+	
+		if(1==1){
+			console.log('1 = 1');
+		} else{
+			console.log('1 != 1');
+		}
+
+		setTimeout(()=>{
+			console.log('first timer');
+
+		},3000);
 
 
-const first = new Promise((resolve,reject)=>{
-	if(1==2){
-		resolve('1 = 2');
-	} else{
-		reject('1 != 2');
-	}
+		let func = ()=>{
+			return new Promise((resolve,reject)=>{
+				setTimeout(()=>{
+					console.log('timer done');
+					
+						resolve([{paymode:'Reward'}]);
+
+				},3000);
+			});
+		};
+		return await func();
+};
+
+
+let getPaymode = exportsModule()
+	.then((t)=>{
+		console.log('Paymode: ' + t[0].paymode)
+	})
+	.catch((t)=>{
+		console.log('Failure: ' + t);
 });
 
-const second = new Promise((resolve,reject)=>{
-	if(2==4){
-		resolve('2 = 4');
-	} else{
-		reject('2 != 4');
-	}
-});
 
-
-
-let firstResult = first.then((t)=>{console.log('Success: ' + t)}).catch((t)=>{
-	console.log('Failure: ' + t);
-});
-
-
-let secondResult = second.then((t)=>{console.log('Success: ' + t)}).catch((t)=>{
-	console.log('Failure: ' + t);
-});
-
-console.log(firstResult);
-console.log(secondResult);
+console.log(getPaymode);
